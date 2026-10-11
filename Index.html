@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Complete Guide to Building Skills for Claude</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Inter', sans-serif; background-color: #fafaf9; color: #292524; }
+.chart-container { position: relative; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto; height: 50vh; max-height: 450px; }
+.nav-btn.active { border-bottom: 2px solid #4f46e5; color: #4f46e5; font-weight: 600; }
+.tree-line { border-left: 2px solid #e7e5e4; margin-left: 0.75rem; padding-left: 1rem; }
+.fade-in { animation: fadeIn 0.3s ease-in-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        brand: { 50: '#eef2ff', 100: '#e0e7ff', 500: '#6366f1', 600: '#4f46e5', 900: '#312e81' },
+        stone: { 50: '#fafaf9', 100: '#f5f5f4', 200: '#e7e5e4', 800: '#292524', 900: '#1c1917' }
+      }
+    }
+  }
+}
+</script>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+<!-- Chosen Palette: Warm Neutrals (Stone) with Indigo/Brand accents for a calm, professional developer documentation feel. -->
+<!-- Application Structure Plan: The SPA uses a tabbed navigation dashboard structure. It synthesizes the linear PDF into 4 functional areas: 'Overview & Principles' (for conceptual understanding), 'Architecture & Creation' (for technical implementation), 'Patterns & Use Cases' (for applied examples), and 'Impact & Performance' (for quantitative validation). This allows developers to immediately jump to the aspect of skill-building they need, whether it's understanding the "why", the "how", or looking at metrics, rather than scrolling through a 30-page linear document. -->
+<!-- Visualization & Content Choices: 
+1. Conceptual Comparison (MCP vs Skills): HTML Grid table. Goal: Compare functions. Justification: Side-by-side layout is best for comparing two distinct concepts.
+2. Skill Anatomy: Interactive HTML/CSS Tree directory. Goal: Organize. Justification: Developers understand file trees intuitively. NO SVG used; Unicode folder/file icons utilized.
+3. YAML Generator: Interactive HTML Form + Pre/Code block. Goal: Change/Interact. Justification: Active learning. Lets users practice the strict YAML requirements (kebab-case, no XML) safely.
+4. Performance Metrics: Chart.js Bar Chart. Goal: Compare/Inform. Justification: Visually demonstrates the massive token and error reduction outlined in the report's testing section. -->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+<header class="bg-white border-b border-stone-200 sticky top-0 z-50 shadow-sm">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl">&#128640;</span>
+        <h1 class="text-xl font-bold text-stone-900 tracking-tight">Claude Skills Explorer</h1>
+      </div>
+      <nav class="hidden md:flex space-x-8" id="desktop-nav">
+        <button onclick="navigate('intro')" class="nav-btn active text-stone-500 hover:text-brand-600 px-1 py-5 text-sm font-medium transition-colors" data-target="intro">Fundamentals</button>
+        <button onclick="navigate('architecture')" class="nav-btn text-stone-500 hover:text-brand-600 px-1 py-5 text-sm font-medium transition-colors" data-target="architecture">Architecture</button>
+        <button onclick="navigate('patterns')" class="nav-btn text-stone-500 hover:text-brand-600 px-1 py-5 text-sm font-medium transition-colors" data-target="patterns">Patterns</button>
+        <button onclick="navigate('performance')" class="nav-btn text-stone-500 hover:text-brand-600 px-1 py-5 text-sm font-medium transition-colors" data-target="performance">Impact</button>
+      </nav>
+      <div class="md:hidden flex items-center">
+        <select id="mobile-nav" onchange="navigate(this.value)" class="bg-stone-100 border border-stone-300 text-stone-900 text-sm rounded-lg focus:ring-brand-500 focus:border-brand-500 block w-full p-2.5">
+          <option value="intro">Fundamentals</option>
+          <option value="architecture">Architecture</option>
+          <option value="patterns">Patterns</option>
+          <option value="performance">Impact</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+  <section id="intro" class="view-section fade-in">
+    <div class="mb-8">
+      <h2 class="text-3xl font-bold text-stone-900 mb-4">Skill Fundamentals & Core Concepts</h2>
+      <p class="text-lg text-stone-600 leading-relaxed">This section introduces the foundational concepts of Claude Skills. Here, you will learn what a skill is, the core design principles guiding their creation, and the crucial relationship between Skills and the Model Context Protocol (MCP). Understanding these fundamentals is essential before building your own workflows, as it establishes the "why" behind the technology.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+        <h3 class="text-xl font-semibold mb-3 flex items-center gap-2"><span class="text-brand-600">&#10024;</span> What is a Skill?</h3>
+        <p class="text-stone-600 mb-4">A skill is a set of instructions - packaged as a simple folder - that teaches Claude how to handle specific tasks or workflows. Instead of re-explaining your preferences and domain expertise in every conversation, skills let you teach Claude once and benefit every time.</p>
+        <ul class="space-y-2 text-stone-600 text-sm">
+          <li class="flex items-start gap-2"><span class="text-green-500">&#10003;</span> Highly powerful for repeatable workflows.</li>
+          <li class="flex items-start gap-2"><span class="text-green-500">&#10003;</span> Works well with code execution and document creation.</li>
+          <li class="flex items-start gap-2"><span class="text-green-500">&#10003;</span> Adds a knowledge layer to MCP raw tool access.</li>
+        </ul>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+        <h3 class="text-xl font-semibold mb-3 flex items-center gap-2"><span class="text-brand-600">&#128208;</span> Core Design Principles</h3>
+        <div class="space-y-4">
+          <div>
+            <h4 class="font-medium text-stone-900">1. Progressive Disclosure</h4>
+            <p class="text-sm text-stone-600">A three-level system to minimize token usage: Level 1 (YAML frontmatter) for discovery, Level 2 (SKILL.md body) for main instructions, Level 3 (Linked files) for deep context.</p>
+          </div>
+          <div>
+            <h4 class="font-medium text-stone-900">2. Composability</h4>
+            <p class="text-sm text-stone-600">Claude can load multiple skills simultaneously. Skills should work well alongside others.</p>
+          </div>
+          <div>
+            <h4 class="font-medium text-stone-900">3. Portability</h4>
+            <p class="text-sm text-stone-600">Works identically across Claude.ai, Claude Code, and the API.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-brand-50 rounded-xl p-8 border border-brand-100">
+      <h3 class="text-2xl font-bold text-brand-900 mb-4 text-center">The Kitchen Analogy: MCP vs. Skills</h3>
+      <p class="text-center text-brand-700 mb-8 max-w-2xl mx-auto">MCP provides the professional kitchen (tools, ingredients). Skills provide the recipes (step-by-step instructions).</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-white p-5 rounded-lg shadow-sm border border-brand-200">
+          <h4 class="font-bold text-lg text-stone-900 mb-3 text-center border-b pb-2">Model Context Protocol (Connectivity)</h4>
+          <ul class="space-y-3 text-sm text-stone-700">
+            <li class="flex items-center gap-2"><span class="text-2xl">&#128268;</span> Connects Claude to your service (Notion, Asana).</li>
+            <li class="flex items-center gap-2"><span class="text-2xl">&#128295;</span> Provides real-time data access and tool invocation.</li>
+            <li class="flex items-center gap-2 font-semibold text-brand-600"><span class="text-2xl">&#10067;</span> Defines WHAT Claude can do.</li>
+          </ul>
+        </div>
+        <div class="bg-white p-5 rounded-lg shadow-sm border border-brand-200">
+          <h4 class="font-bold text-lg text-stone-900 mb-3 text-center border-b pb-2">Claude Skills (Knowledge)</h4>
+          <ul class="space-y-3 text-sm text-stone-700">
+            <li class="flex items-center gap-2"><span class="text-2xl">&#128218;</span> Teaches Claude how to use your service effectively.</li>
+            <li class="flex items-center gap-2"><span class="text-2xl">&#128203;</span> Captures workflows and embedded best practices.</li>
+            <li class="flex items-center gap-2 font-semibold text-brand-600"><span class="text-2xl">&#128161;</span> Defines HOW Claude should do it.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="architecture" class="view-section hidden fade-in">
+    <div class="mb-8">
+      <h2 class="text-3xl font-bold text-stone-900 mb-4">Skill Architecture & Creation</h2>
+      <p class="text-lg text-stone-600 leading-relaxed">This section details the strict technical requirements for building a skill. You will interact with a visual representation of the required folder structure and utilize an interactive YAML builder tool. This hands-on approach ensures you understand the exact formatting rules (like kebab-case naming and progressive disclosure) required for Claude to successfully recognize and trigger your skill.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-1">
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 h-full">
+          <h3 class="text-xl font-semibold mb-4 border-b pb-2">Folder Structure</h3>
+          <p class="text-sm text-stone-600 mb-4">A skill is packaged as a standard directory. The naming conventions are strict.</p>
+          
+          <div class="font-mono text-sm bg-stone-50 p-4 rounded-lg border border-stone-200 overflow-x-auto">
+            <div class="text-brand-600 font-bold">&#128193; your-skill-name/</div>
+            <div class="tree-line">
+              <div class="text-stone-800 font-bold py-1 group relative cursor-help">
+                &#128196; SKILL.md <span class="text-xs text-red-500 ml-2">(Required)</span>
+                <div class="absolute hidden group-hover:block bg-stone-800 text-white p-2 rounded text-xs -top-8 left-0 w-48 z-10">Must be exactly SKILL.md. No variations.</div>
+              </div>
+              <div class="text-stone-600 py-1">&#128193; scripts/ <span class="text-xs text-stone-400 ml-2">(Optional)</span></div>
+              <div class="tree-line text-stone-500 text-xs">
+                <div>&#128196; process_data.py</div>
+              </div>
+              <div class="text-stone-600 py-1">&#128193; references/ <span class="text-xs text-stone-400 ml-2">(Optional)</span></div>
+              <div class="tree-line text-stone-500 text-xs">
+                <div>&#128196; api-guide.md</div>
+              </div>
+              <div class="text-stone-600 py-1">&#128193; assets/ <span class="text-xs text-stone-400 ml-2">(Optional)</span></div>
+            </div>
+          </div>
+          <div class="mt-4 p-3 bg-red-50 text-red-800 rounded-lg text-sm border border-red-100">
+            <strong>Critical Rule:</strong> Do not include a README.md inside the skill folder. All documentation goes in SKILL.md or references/.
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-2">
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+          <h3 class="text-xl font-semibold mb-4 border-b pb-2">Interactive YAML Frontmatter Builder</h3>
+          <p class="text-sm text-stone-600 mb-6">The YAML frontmatter is how Claude decides whether to load your skill. It acts as the first level of progressive disclosure. Try building one below to see the formatting rules applied in real-time.</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-stone-700 mb-1">Skill Name</label>
+                <input type="text" id="yaml-name" class="w-full p-2 border border-stone-300 rounded focus:ring-brand-500 focus:border-brand-500 text-sm" placeholder="e.g. Notion Project Setup" oninput="updateYaml()">
+                <p class="text-xs text-stone-500 mt-1" id="name-warning">Must be kebab-case. No spaces or capitals.</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-stone-700 mb-1">Description (What & When)</label>
+                <textarea id="yaml-desc" rows="4" class="w-full p-2 border border-stone-300 rounded focus:ring-brand-500 focus:border-brand-500 text-sm" placeholder="Manages Linear workflows. Use when user mentions 'sprint' or asks to 'create tickets'." oninput="updateYaml()"></textarea>
+                <p class="text-xs text-stone-500 mt-1">Include specific trigger phrases. No XML tags (&lt; &gt;).</p>
+              </div>
+            </div>
+            
+            <div class="bg-stone-900 rounded-lg p-4 relative flex flex-col">
+              <div class="text-xs text-stone-400 font-mono mb-2 uppercase tracking-wider">Preview: SKILL.md</div>
+              <pre class="text-green-400 font-mono text-sm overflow-x-auto whitespace-pre-wrap flex-grow" id="yaml-preview">---
+name: your-skill-name
+description: What it does. Use when user asks to [specific phrases].
+---</pre>
+              <div id="validation-box" class="mt-2 p-2 rounded text-xs bg-green-900/50 text-green-300 border border-green-800">
+                &#10003; Valid Frontmatter Structure
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="patterns" class="view-section hidden fade-in">
+    <div class="mb-8">
+      <h2 class="text-3xl font-bold text-stone-900 mb-4">Workflow Patterns & Use Cases</h2>
+      <p class="text-lg text-stone-600 leading-relaxed">Explore the common structural patterns observed in highly effective skills. This section categorizes skills by their operational flow, helping you choose the right architectural approach for your specific problem. Reviewing these patterns will guide you whether you are orchestrating multiple MCP servers or building a localized iterative refinement loop.</p>
+    </div>
+
+    <div class="mb-8">
+      <div class="flex flex-wrap gap-2 mb-6" id="pattern-filters">
+        <button onclick="filterPatterns('all')" class="px-4 py-2 rounded-full text-sm font-medium bg-brand-600 text-white transition-colors">All Patterns</button>
+        <button onclick="filterPatterns('automation')" class="px-4 py-2 rounded-full text-sm font-medium bg-stone-200 text-stone-700 hover:bg-stone-300 transition-colors">Workflow Automation</button>
+        <button onclick="filterPatterns('mcp')" class="px-4 py-2 rounded-full text-sm font-medium bg-stone-200 text-stone-700 hover:bg-stone-300 transition-colors">MCP Enhancement</button>
+        <button onclick="filterPatterns('creation')" class="px-4 py-2 rounded-full text-sm font-medium bg-stone-200 text-stone-700 hover:bg-stone-300 transition-colors">Creation & Refinement</button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="pattern-grid">
+        
+        <div class="pattern-card bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden" data-category="automation">
+          <div class="bg-blue-50 p-4 border-b border-blue-100 flex items-center justify-between">
+            <h3 class="font-bold text-blue-900">1. Sequential Workflow</h3>
+            <span class="text-2xl">&#8594;</span>
+          </div>
+          <div class="p-5">
+            <p class="text-sm text-stone-600 mb-4">Use when users need multi-step processes in a specific order with hard dependencies.</p>
+            <div class="bg-stone-50 p-3 rounded border border-stone-200 text-xs font-mono text-stone-700 space-y-1">
+              <div>Step 1: Create Account</div>
+              <div>Step 2: Setup Payment (waits for Step 1)</div>
+              <div>Step 3: Create Subscription</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pattern-card bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden" data-category="mcp">
+          <div class="bg-purple-50 p-4 border-b border-purple-100 flex items-center justify-between">
+            <h3 class="font-bold text-purple-900">2. Multi-MCP Coordination</h3>
+            <span class="text-2xl">&#128279;</span>
+          </div>
+          <div class="p-5">
+            <p class="text-sm text-stone-600 mb-4">Use when workflows span multiple distinct services and require data passing.</p>
+            <div class="bg-stone-50 p-3 rounded border border-stone-200 text-xs font-mono text-stone-700 space-y-1">
+              <div>Phase 1: Figma MCP (Export)</div>
+              <div>Phase 2: Drive MCP (Store)</div>
+              <div>Phase 3: Linear MCP (Create Tasks)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pattern-card bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden" data-category="creation">
+          <div class="bg-emerald-50 p-4 border-b border-emerald-100 flex items-center justify-between">
+            <h3 class="font-bold text-emerald-900">3. Iterative Refinement</h3>
+            <span class="text-2xl">&#8635;</span>
+          </div>
+          <div class="p-5">
+            <p class="text-sm text-stone-600 mb-4">Use when output quality improves with iteration, validation scripts, and self-correction.</p>
+            <div class="bg-stone-50 p-3 rounded border border-stone-200 text-xs font-mono text-stone-700 space-y-1">
+              <div>Draft &rarr; Validate Script &rarr; Identify Issues</div>
+              <div>Loop: Fix Issues &rarr; Re-validate</div>
+              <div>Finalize &amp; Save</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pattern-card bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden" data-category="automation">
+          <div class="bg-amber-50 p-4 border-b border-amber-100 flex items-center justify-between">
+            <h3 class="font-bold text-amber-900">4. Context-Aware Selection</h3>
+            <span class="text-2xl">&#9082;</span>
+          </div>
+          <div class="p-5">
+            <p class="text-sm text-stone-600 mb-4">Use when the desired outcome is the same, but the tool chosen depends on specific context.</p>
+            <div class="bg-stone-50 p-3 rounded border border-stone-200 text-xs font-mono text-stone-700 space-y-1">
+              <div>If Size > 10MB: Use Cloud Storage</div>
+              <div>If Code: Use GitHub MCP</div>
+              <div>Else: Use Local Storage</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pattern-card bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden" data-category="mcp">
+          <div class="bg-rose-50 p-4 border-b border-rose-100 flex items-center justify-between">
+            <h3 class="font-bold text-rose-900">5. Domain Intelligence</h3>
+            <span class="text-2xl">&#129497;</span>
+          </div>
+          <div class="p-5">
+            <p class="text-sm text-stone-600 mb-4">Use when your skill adds highly specialized knowledge or compliance rules before taking action.</p>
+            <div class="bg-stone-50 p-3 rounded border border-stone-200 text-xs font-mono text-stone-700 space-y-1">
+              <div>Fetch Details &rarr; Apply Compliance Rules</div>
+              <div>If Passed: Process Action</div>
+              <div>If Failed: Flag for Review &amp; Audit</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="performance" class="view-section hidden fade-in">
+    <div class="mb-8">
+      <h2 class="text-3xl font-bold text-stone-900 mb-4">Testing & Impact Measurement</h2>
+      <p class="text-lg text-stone-600 leading-relaxed">How do you know if a skill is successful? This section focuses on evaluating skill performance through quantitative metrics and structured testing methodologies. The interactive chart below visualizes the dramatic efficiency gains (reduced tokens, fewer user messages, and zero API failures) achieved when moving from an unguided workflow to a skill-guided automated workflow.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2">
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+          <h3 class="text-xl font-semibold mb-6 flex justify-between items-center">
+            Quantitative Impact Analysis
+            <div class="text-sm font-normal bg-stone-100 px-3 py-1 rounded-full text-stone-600">Baseline Comparison</div>
+          </h3>
+          <div class="chart-container">
+            <canvas id="metricsChart"></canvas>
+          </div>
+          <p class="text-center text-sm text-stone-500 mt-4 italic">Data represents a typical complex workflow execution. Skills drastically reduce token overhead and cognitive load.</p>
+        </div>
+      </div>
+
+      <div class="lg:col-span-1 space-y-6">
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+          <h3 class="text-lg font-bold text-stone-900 mb-3 border-b pb-2">Testing Methodologies</h3>
+          <ul class="space-y-4">
+            <li>
+              <h4 class="font-semibold text-sm text-stone-800">1. Triggering Tests</h4>
+              <p class="text-xs text-stone-600">Ensure the skill loads at the right times. Test obvious tasks, paraphrased requests, and ensure it ignores unrelated topics.</p>
+            </li>
+            <li>
+              <h4 class="font-semibold text-sm text-stone-800">2. Functional Tests</h4>
+              <p class="text-xs text-stone-600">Verify outputs are correct, API calls succeed, and error handling works perfectly for edge cases.</p>
+            </li>
+            <li>
+              <h4 class="font-semibold text-sm text-stone-800">3. Iteration Triggers</h4>
+              <p class="text-xs text-stone-600">If undertriggering: add detail to description. If overtriggering: add negative triggers ("Do NOT use for...").</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-stone-900 p-6 rounded-xl shadow-sm border border-stone-800 text-white">
+          <h3 class="text-lg font-bold mb-2">The `skill-creator` Skill</h3>
+          <p class="text-sm text-stone-300 mb-4">Available in Claude.ai to help build and test functional skills rapidly.</p>
+          <div class="bg-stone-800 p-3 rounded font-mono text-xs text-green-400">
+            "Use the skill-creator skill to help me build a skill for [your use case]"
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // State Management
+  const state = {
+    currentView: 'intro',
+    chartInstance: null
+  };
+
+  // Data Storage for Chart
+  const chartData = {
+    labels: ['User Messages', 'Failed API Calls', 'Tokens Consumed (x1000)'],
+    datasets: [
+      {
+        label: 'Without Skill (Baseline)',
+        data: [15, 3, 12],
+        backgroundColor: '#e7e5e4', 
+        borderColor: '#a8a29e',
+        borderWidth: 1
+      },
+      {
+        label: 'With Skill (Optimized)',
+        data: [2, 0, 6],
+        backgroundColor: '#4f46e5', 
+        borderColor: '#312e81',
+        borderWidth: 1
+      }
+    ]
+  };
+
+  // Core Interaction & Navigation Logic
+  function navigate(viewId) {
+    document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+    
+    const targetView = document.getElementById(viewId);
+    if(targetView) {
+      targetView.classList.remove('hidden');
+    }
+    
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      if(btn.dataset.target === viewId) {
+        btn.classList.add('active', 'text-brand-600');
+        btn.classList.remove('text-stone-500');
+      } else {
+        btn.classList.remove('active', 'text-brand-600');
+        btn.classList.add('text-stone-500');
+      }
+    });
+
+    document.getElementById('mobile-nav').value = viewId;
+    state.currentView = viewId;
+
+    if(viewId === 'performance') {
+      renderChart();
+    }
+  }
+
+  // Interactive Form Logic (YAML Builder)
+  function toKebabCase(str) {
+    return str
+      .replace(/([a-z])([A-Z])/g, '$1-$2')
+      .replace(/[\s_]+/g, '-')
+      .toLowerCase()
+      .replace(/[^a-z0-9-]/g, '');
+  }
+
+  function updateYaml() {
+    const rawName = document.getElementById('yaml-name').value;
+    const desc = document.getElementById('yaml-desc').value;
+    const warningText = document.getElementById('name-warning');
+    const validationBox = document.getElementById('validation-box');
+    
+    const kebabName = toKebabCase(rawName) || 'your-skill-name';
+    
+    if (rawName !== kebabName && rawName.length > 0) {
+      warningText.innerHTML = `Formatting applied: <strong>${kebabName}</strong>`;
+      warningText.classList.add('text-amber-600');
+      warningText.classList.remove('text-stone-500');
+    } else {
+      warningText.textContent = "Must be kebab-case. No spaces or capitals.";
+      warningText.classList.remove('text-amber-600');
+      warningText.classList.add('text-stone-500');
+    }
+
+    let isDescValid = true;
+    let descWarning = "";
+    
+    if (desc.includes('<') || desc.includes('>')) {
+      isDescValid = false;
+      descWarning = "XML tags (< >) are forbidden.";
+    }
+
+    const preview = `---
+name: ${kebabName}
+description: ${desc || 'What it does. Use when user asks to [specific phrases].'}
+---`;
+    
+    document.getElementById('yaml-preview').textContent = preview;
+
+    if (!isDescValid) {
+      validationBox.className = "mt-2 p-2 rounded text-xs bg-red-900/50 text-red-300 border border-red-800";
+      validationBox.innerHTML = `&#10007; Validation Error: ${descWarning}`;
+    } else if (rawName.length > 0 && desc.length > 10) {
+      validationBox.className = "mt-2 p-2 rounded text-xs bg-green-900/50 text-green-300 border border-green-800";
+      validationBox.innerHTML = `&#10003; Valid Frontmatter Structure`;
+    } else {
+      validationBox.className = "mt-2 p-2 rounded text-xs bg-stone-800 text-stone-400 border border-stone-700";
+      validationBox.innerHTML = `&#9432; Enter details to validate`;
+    }
+  }
+
+  // Filtering Logic
+  function filterPatterns(category) {
+    const buttons = document.getElementById('pattern-filters').children;
+    for(let btn of buttons) {
+      btn.classList.remove('bg-brand-600', 'text-white');
+      btn.classList.add('bg-stone-200', 'text-stone-700');
+    }
+    
+    event.target.classList.remove('bg-stone-200', 'text-stone-700');
+    event.target.classList.add('bg-brand-600', 'text-white');
+
+    const cards = document.querySelectorAll('.pattern-card');
+    cards.forEach(card => {
+      if(category === 'all' || card.dataset.category === category) {
+        card.style.display = 'block';
+        card.classList.add('fade-in');
+      } else {
+        card.style.display = 'none';
+        card.classList.remove('fade-in');
+      }
+    });
+  }
+
+  // Chart Rendering Logic (Chart.js)
+  function renderChart() {
+    if (state.chartInstance) {
+      return; 
+    }
+    
+    const ctx = document.getElementById('metricsChart').getContext('2d');
+    
+    Chart.defaults.font.family = "'Inter', sans-serif";
+    Chart.defaults.color = '#78716c';
+
+    state.chartInstance = new Chart(ctx, {
+      type: 'bar',
+      data: chartData,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: { boxWidth: 12, usePointStyle: true }
+          },
+          tooltip: {
+            backgroundColor: '#292524',
+            titleColor: '#fff',
+            bodyColor: '#fff',
+            padding: 10,
+            cornerRadius: 8,
+            displayColors: false,
+            callbacks: {
+              label: function(context) {
+                let label = context.dataset.label || '';
+                if (label) { label += ': '; }
+                if (context.parsed.y !== null) {
+                  if(context.dataIndex === 2) {
+                     label += (context.parsed.y * 1000).toLocaleString() + ' Tokens';
+                  } else {
+                     label += context.parsed.y;
+                  }
+                }
+                return label;
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: { color: '#f5f5f4' },
+            border: { display: false }
+          },
+          x: {
+            grid: { display: false },
+            border: { display: false }
+          }
+        },
+        animation: {
+          duration: 1500,
+          easing: 'easeOutQuart'
+        }
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    navigate('intro');
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Skills & MCP Visual Guide</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: #000;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .glass {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      transition: 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="max-w-7xl mx-auto p-6 space-y-12">
+
+    <!-- Hero Section -->
+    <section class="text-center py-10">
+      <h1 class="text-5xl md:text-6xl font-black bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+        AI Skills & MCP Complete Guide
+      </h1>
+
+      <p class="text-gray-300 text-xl mt-6 max-w-4xl mx-auto leading-relaxed">
+        Roman Urdu mein simple aur visual explanation. Beginner friendly learning.
+        MCP, Skills, YAML, Workflow, AI Agents aur Testing ko easy examples ke saath samjho.
+      </p>
+    </section>
+
+
+    <!-- Big Flow -->
+    <section class="glass rounded-3xl p-8">
+      <h2 class="text-4xl font-black text-center mb-10">
+        Complete AI Automation Flow
+      </h2>
+
+      <div class="grid md:grid-cols-5 gap-4 text-center items-center">
+
+        <div class="glass rounded-2xl p-6">
+          <div class="text-5xl">👤</div>
+          <h3 class="text-2xl font-bold mt-3">User</h3>
+        </div>
+
+        <div class="text-cyan-400 text-4xl hidden md:block">→</div>
+
+        <div class="glass rounded-2xl p-6">
+          <div class="text-5xl">🤖</div>
+          <h3 class="text-2xl font-bold mt-3">AI Agent</h3>
+        </div>
+
+        <div class="text-cyan-400 text-4xl hidden md:block">→</div>
+
+        <div class="glass rounded-2xl p-6">
+          <div class="text-5xl">🧠</div>
+          <h3 class="text-2xl font-bold mt-3">Skills</h3>
+        </div>
+
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4 text-center items-center mt-4">
+
+        <div class="glass rounded-2xl p-6">
+          <div class="text-5xl">🔌</div>
+          <h3 class="text-2xl font-bold mt-3">MCP</h3>
+        </div>
+
+        <div class="text-cyan-400 text-4xl hidden md:block">→</div>
+
+        <div class="glass rounded-2xl p-6">
+          <div class="text-5xl">📱</div>
+          <h3 class="text-2xl font-bold mt-3">Apps</h3>
+        </div>
+
+      </div>
+
+      <div class="mt-8 bg-black/40 rounded-2xl p-6 border border-cyan-500/20">
+        <p class="text-lg leading-relaxed text-gray-200">
+          <span class="text-cyan-400 font-bold">Simple Samjho:</span>
+          User AI ko command deta hai → AI Agent sochta hai → Skills workflow sikhati hain → MCP apps se connect karta hai → Apps actual kaam karti hain.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- Cards -->
+    <section class="grid lg:grid-cols-2 gap-8">
+
+      <!-- MCP -->
+      <div class="glass rounded-3xl overflow-hidden card">
+        <div class="bg-gradient-to-r from-blue-500 to-cyan-400 p-6 text-black">
+          <div class="flex items-center gap-4">
+            <div class="text-5xl">🔌</div>
+            <div>
+              <h2 class="text-4xl font-black">MCP</h2>
+              <p class="font-bold">Model Context Protocol</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 space-y-6">
+
+          <div>
+            <h3 class="text-2xl font-bold text-cyan-400 mb-3">Ye Kya Hai?</h3>
+            <p class="text-gray-300 text-lg leading-relaxed">
+              MCP AI ko external apps se connect karta hai jaise GitHub, Figma, Notion aur Google Drive.
+            </p>
+          </div>
+
+          <div class="bg-black/40 rounded-2xl p-4 border border-white/10">
+            <h3 class="text-2xl font-bold text-green-400 mb-2">Example</h3>
+            <p class="font-mono text-lg">Claude → MCP → GitHub → Repo Create</p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold text-yellow-400 mb-3">Purpose</h3>
+            <p class="text-gray-300 text-lg">AI ko real world kaam karwana.</p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold text-red-400 mb-3">Galtiyan</h3>
+            <ul class="space-y-2 text-gray-200">
+              <li class="bg-red-500/10 p-3 rounded-xl">❌ API keys expose mat karo</li>
+              <li class="bg-red-500/10 p-3 rounded-xl">❌ Wrong permissions mat do</li>
+              <li class="bg-red-500/10 p-3 rounded-xl">❌ Too many tools ek sath use mat karo</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- Skills -->
+      <div class="glass rounded-3xl overflow-hidden card">
+        <div class="bg-gradient-to-r from-purple-500 to-pink-400 p-6 text-black">
+          <div class="flex items-center gap-4">
+            <div class="text-5xl">🧠</div>
+            <div>
+              <h2 class="text-4xl font-black">Skills</h2>
+              <p class="font-bold">AI Trained Behavior</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 space-y-6">
+
+          <div>
+            <h3 class="text-2xl font-bold text-cyan-400 mb-3">Ye Kya Hai?</h3>
+            <p class="text-gray-300 text-lg leading-relaxed">
+              Skills AI ko specific kaam properly sikhati hain taake har baar same prompt repeat na karna pade.
+            </p>
+          </div>
+
+          <div class="bg-black/40 rounded-2xl p-4 border border-white/10">
+            <h3 class="text-2xl font-bold text-green-400 mb-2">Example</h3>
+            <p class="font-mono text-lg">Thumbnail Skill → Same Neon Style Automatically</p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold text-yellow-400 mb-3">Purpose</h3>
+            <p class="text-gray-300 text-lg">Consistency aur automation.</p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold text-red-400 mb-3">Galtiyan</h3>
+            <ul class="space-y-2 text-gray-200">
+              <li class="bg-red-500/10 p-3 rounded-xl">❌ Vague description mat likho</li>
+              <li class="bg-red-500/10 p-3 rounded-xl">❌ Wrong naming mat use karo</li>
+              <li class="bg-red-500/10 p-3 rounded-xl">❌ Unclear instructions mat rakho</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- YAML -->
+      <div class="glass rounded-3xl overflow-hidden card">
+        <div class="bg-gradient-to-r from-green-500 to-emerald-400 p-6 text-black">
+          <div class="flex items-center gap-4">
+            <div class="text-5xl">⚙️</div>
+            <div>
+              <h2 class="text-4xl font-black">YAML</h2>
+              <p class="font-bold">Settings Language</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 space-y-6">
+
+          <div>
+            <h3 class="text-2xl font-bold text-cyan-400 mb-3">Example</h3>
+
+            <div class="bg-black rounded-2xl p-6 border border-yellow-500/30 overflow-x-auto">
+<pre class="text-yellow-300 text-lg">
+---
+name: youtube-skill
+description: Creates thumbnails
+version: 1.0
+---
+</pre>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold text-yellow-400 mb-3">Purpose</h3>
+            <p class="text-gray-300 text-lg">Machine readable settings.</p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold text-red-400 mb-3">Galtiyan</h3>
+            <ul class="space-y-2 text-gray-200">
+              <li class="bg-red-500/10 p-3 rounded-xl">❌ Tabs use mat karo</li>
+              <li class="bg-red-500/10 p-3 rounded-xl">❌ Broken quotes mat likho</li>
+              <li class="bg-red-500/10 p-3 rounded-xl">❌ Wrong spacing mat karo</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- Workflow -->
+      <div class="glass rounded-3xl overflow-hidden card">
+        <div class="bg-gradient-to-r from-orange-500 to-yellow-400 p-6 text-black">
+          <div class="flex items-center gap-4">
+            <div class="text-5xl">📋</div>
+            <div>
+              <h2 class="text-4xl font-black">Workflow</h2>
+              <p class="font-bold">Step-by-Step Process</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 space-y-6">
+
+          <div>
+            <h3 class="text-2xl font-bold text-cyan-400 mb-3">Example</h3>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+              <div class="glass rounded-2xl p-4">✍️ Script</div>
+              <div class="glass rounded-2xl p-4">🎨 Thumbnail</div>
+              <div class="glass rounded-2xl p-4">🎬 Edit</div>
+              <div class="glass rounded-2xl p-4">🚀 Upload</div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold text-yellow-400 mb-3">Purpose</h3>
+            <p class="text-gray-300 text-lg">Kaam ko organized banana.</p>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold text-red-400 mb-3">Galtiyan</h3>
+            <ul class="space-y-2 text-gray-200">
+              <li class="bg-red-500/10 p-3 rounded-xl">❌ Planning skip mat karo</li>
+              <li class="bg-red-500/10 p-3 rounded-xl">❌ Validation mat bhoolo</li>
+              <li class="bg-red-500/10 p-3 rounded-xl">❌ Extra unnecessary steps mat rakho</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- Folder Structure -->
+    <section class="glass rounded-3xl p-8">
+      <h2 class="text-4xl font-black text-center mb-8">
+        Folder Structure Visual
+      </h2>
+
+      <div class="bg-black rounded-3xl p-8 font-mono text-lg border border-green-500/30 overflow-x-auto">
+        <div class="text-green-400">my-ai-skill/</div>
+        <div class="ml-6 text-cyan-300">├── SKILL.md</div>
+        <div class="ml-10 text-gray-400">→ Main instructions</div>
+
+        <div class="ml-6 text-cyan-300">├── scripts/</div>
+        <div class="ml-10 text-gray-400">→ Python automation</div>
+
+        <div class="ml-6 text-cyan-300">├── references/</div>
+        <div class="ml-10 text-gray-400">→ Documentation</div>
+
+        <div class="ml-6 text-cyan-300">└── assets/</div>
+        <div class="ml-10 text-gray-400">→ Templates & icons</div>
+      </div>
+    </section>
+
+
+    <!-- Final Summary -->
+    <section class="text-center py-10">
+      <h2 class="text-5xl font-black bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent mb-10">
+        Final Easy Summary
+      </h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <div class="glass rounded-2xl p-6">
+          <h3 class="text-3xl font-black text-cyan-400">MCP</h3>
+          <p class="text-gray-300 mt-3 text-lg">Apps Connect</p>
+        </div>
+
+        <div class="glass rounded-2xl p-6">
+          <h3 class="text-3xl font-black text-cyan-400">Skills</h3>
+          <p class="text-gray-300 mt-3 text-lg">AI Training</p>
+        </div>
+
+        <div class="glass rounded-2xl p-6">
+          <h3 class="text-3xl font-black text-cyan-400">Workflow</h3>
+          <p class="text-gray-300 mt-3 text-lg">Step Process</p>
+        </div>
+
+        <div class="glass rounded-2xl p-6">
+          <h3 class="text-3xl font-black text-cyan-400">AI Agent</h3>
+          <p class="text-gray-300 mt-3 text-lg">AI Worker</p>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+</body>
+</html>
